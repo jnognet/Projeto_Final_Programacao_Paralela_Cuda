@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string>
 
+#include "Pixel.h"
+
 #ifndef EXP_CUDA_GRAYSCALE
 
 	#ifndef BUILD_CUDA_GRAYSCALE

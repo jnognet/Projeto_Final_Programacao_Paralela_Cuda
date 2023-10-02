@@ -1,31 +1,28 @@
-﻿#define BUILD_CUDA_GRAYSCALE
+﻿#pragma once
+
+#include <math.h>
 
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-#include <stdio.h>
-#include <math.h>
-#include <string>
-
-#include "GrayScaleCuda.h"
+#include "CudaKernel.h"
 #include "Pixel.h"
 
 __global__ void grayScaleKernel(Pixel_t* image) {
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
-    Pixel_t inpixel = *(image + i);
-    int value = (0.299 * inpixel.R) + (0.587 * inpixel.G) + (0.114 * inpixel.B);
-    inpixel.R = value;
-    inpixel.G = value;
-    inpixel.B = value;
-    *(image + i) = inpixel;
+	Pixel_t inpixel = *(image + i);
+	int value = (0.299 * inpixel.R) + (0.587 * inpixel.G) + (0.114 * inpixel.B);
+	inpixel.R = value;
+	inpixel.G = value;
+	inpixel.B = value;
+	*(image + i) = inpixel;
 }
 
-extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(std::string file_src, std::string file_dst)
-{
-	Pixel_t* dev_image = 0;
+bool grayScaleCuda(Pixel_t* image, int pixels_to_process)
+{	
 	cudaError_t cudaStatus;
-
-	/*
+	Pixel_t* dev_image;	
+	
 	cudaStatus = cudaSetDevice(0);
 	if (cudaStatus != cudaSuccess) {
 		goto Error;
@@ -66,10 +63,10 @@ extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(std::string file_src, std::
 	if (cudaStatus != cudaSuccess) {
 		goto Error;
 	}
-
+		
 	return true;
 
 Error:
-	cudaFree(dev_image); */
+	cudaFree(dev_image);
 	return false;
 }
