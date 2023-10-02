@@ -5,8 +5,10 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string>
 
 #include "GrayScaleCuda.h"
+#include "Pixel.h"
 
 __global__ void grayScaleKernel(Pixel_t* image) {
 	int i = blockIdx.x * blockDim.x + threadIdx.x;
@@ -18,11 +20,12 @@ __global__ void grayScaleKernel(Pixel_t* image) {
     *(image + i) = inpixel;
 }
 
-extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(Pixel_t* image, int pixels_to_process)
+extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(std::string file_src, std::string file_dst)
 {
 	Pixel_t* dev_image = 0;
 	cudaError_t cudaStatus;
 
+	/*
 	cudaStatus = cudaSetDevice(0);
 	if (cudaStatus != cudaSuccess) {
 		goto Error;
@@ -67,6 +70,6 @@ extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(Pixel_t* image, int pixels_
 	return true;
 
 Error:
-	cudaFree(dev_image);
+	cudaFree(dev_image); */
 	return false;
 }
