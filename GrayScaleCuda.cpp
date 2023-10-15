@@ -41,9 +41,9 @@ extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(std::string file_src, std::
 	if(!grayScaleCuda(image, pixels_to_process))
 		goto Error;	
 
-	for (int x = 0, p = 0; x < input.width(); x++)
+	for (int x = 0, p = 0; x < output.width(); x++)
 	{
-		for (int y = 0; y < input.height(); y++)
+		for (int y = 0; y < output.height(); y++)
 		{
 			Pixel_t inpixel = *(image + p);
 			output(x, y, 0) = inpixel.R;
@@ -55,8 +55,10 @@ extern "C" EXP_CUDA_GRAYSCALE bool grayScaleWithCuda(std::string file_src, std::
 	}
 
 	save_image(output, file_dst);	
+	free(image);
 	return true;
 
 Error:
+	free(image);
 	return false;
 }
