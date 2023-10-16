@@ -11,12 +11,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="kernel.cu">
+    <CudaCompile Include="grayscalekernel.cu">
+      <Filter>Source Files</Filter>
+    </CudaCompile>
+    <CudaCompile Include="complementkernel.cu">
       <Filter>Source Files</Filter>
     </CudaCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GrayScaleCuda.h">
+    <ClInclude Include="FilterCuda.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Pixel.h">
@@ -27,7 +30,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GrayScaleCuda.cpp">
+    <ClCompile Include="FilterCuda.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

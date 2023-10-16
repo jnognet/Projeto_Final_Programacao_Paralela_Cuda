@@ -83,15 +83,16 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="complementkernel.cu" />
+    <CudaCompile Include="grayscalekernel.cu" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GrayScaleCuda.h" />
+    <ClInclude Include="FilterCuda.h" />
     <ClInclude Include="CudaKernel.h" />
     <ClInclude Include="Pixel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GrayScaleCuda.cpp" />
+    <ClCompile Include="FilterCuda.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
